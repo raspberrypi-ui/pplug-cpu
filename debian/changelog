@@ -1,0 +1,5 @@
+pplug-cpu (0.1) bookworm; urgency=medium
+
+  * First hybrid package version
+
+ -- Simon Long <simon@raspberrypi.com>  Fri, 24 Jan 2025 11:51:56 +0000

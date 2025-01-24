@@ -1,0 +1,36 @@
+# Italian translations for lxplug_bluetooth package.
+# Copyright (C) 2017 Raspberry Pi Ltd
+# This file is distributed under the same license as the lxplug_bluetooth package.
+# Emanuele Goldoni <emanuele.goldoni@gmail.com>, 2020.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-01-23 11:06+0000\n"
+"PO-Revision-Date: 2020-07-13 21:35+0200\n"
+"Last-Translator: Emanuele Goldoni <emanuele.goldoni@gmail.com>\n"
+"Language-Team: Italian\n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.3\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: ../src/cpu.cpp:36
+msgid "Show usage as percentage"
+msgstr ""
+
+#: ../src/cpu.cpp:37
+msgid "Foreground colour"
+msgstr "Colore in primo piano"
+
+#: ../src/cpu.cpp:38
+msgid "Background colour"
+msgstr "Colore di sfondo"
+
+#: ../src/cpu.cpp:42
+#, fuzzy
+msgid "CPU"
+msgstr "TCP"
