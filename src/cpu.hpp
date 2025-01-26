@@ -31,13 +31,9 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <widget.hpp>
 #include <gtkmm/button.h>
 
-#include "lxutils.h"
-
 extern "C" {
+#include "lxutils.h"
 #include "cpu.h"
-extern void cpu_init (CPUPlugin *up);
-extern void cpu_update_display (CPUPlugin *up);
-extern void cpu_destructor (gpointer user_data);
 }
 
 class WayfireCPU : public WayfireWidget

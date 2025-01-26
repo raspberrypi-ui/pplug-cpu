@@ -25,6 +25,10 @@ ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ============================================================================*/
 
+/*----------------------------------------------------------------------------*/
+/* Typedefs and macros                                                        */
+/*----------------------------------------------------------------------------*/
+
 typedef unsigned long long CPUTick;     /* Value from /proc/stat */
 
 typedef struct
@@ -50,6 +54,14 @@ typedef struct
     guint timer;                            /* Timer for periodic update */
     cpu_stat previous_cpu_stat;             /* Previous value of cpu_stat */
 } CPUPlugin;
+
+/*----------------------------------------------------------------------------*/
+/* Prototypes                                                                 */
+/*----------------------------------------------------------------------------*/
+
+extern void cpu_init (CPUPlugin *up);
+extern void cpu_update_display (CPUPlugin *up);
+extern void cpu_destructor (gpointer user_data);
 
 /* End of file */
 /*----------------------------------------------------------------------------*/
