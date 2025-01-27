@@ -29,15 +29,17 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 /* Typedefs and macros                                                        */
 /*----------------------------------------------------------------------------*/
 
-typedef unsigned long long CPUTick;     /* Value from /proc/stat */
+typedef unsigned long long CPUTick;         /* Value from /proc/stat */
 
 typedef struct
 {
-    CPUTick u, n, s, i;             /* User, nice, system, idle */
+    CPUTick u, n, s, i;                     /* User, nice, system, idle */
 }  cpu_stat;
 
 typedef struct
 {
+    GtkWidget *plugin;
+
 #ifdef LXPLUG
     LXPanel *panel;                         /* Back pointer to panel */
     config_setting_t *settings;             /* Plugin settings */
@@ -46,7 +48,7 @@ typedef struct
     gboolean bottom;
     GtkGesture *gesture;
 #endif
-    GtkWidget *plugin;                      /* Back pointer to the widget */
+
     PluginGraph graph;
     GdkRGBA foreground_colour;              /* Foreground colour for drawing area */
     GdkRGBA background_colour;              /* Background colour for drawing area */
