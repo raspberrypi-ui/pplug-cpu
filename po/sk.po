@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-01-23 11:06+0000\n"
-"PO-Revision-Date: 2020-11-28 22:06+0100\n"
+"POT-Creation-Date: 2025-02-03 11:04+0000\n"
+"PO-Revision-Date: 2025-01-31 22:27+0100\n"
 "Last-Translator: Jose Riha <jose1711@gmail.com>\n"
 "Language-Team: Slovak\n"
 "Language: sk\n"
@@ -16,21 +16,38 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 2.4.1\n"
+"X-Generator: Poedit 3.5\n"
 
-#: ../src/cpu.cpp:36
+#: ../src/cpu.cpp:37 ../src/cpu.c:223
 msgid "Show usage as percentage"
 msgstr ""
 
-#: ../src/cpu.cpp:37
+#: ../src/cpu.cpp:38 ../src/cpu.c:224
 msgid "Foreground colour"
 msgstr "Farba popredia"
 
-#: ../src/cpu.cpp:38
+#: ../src/cpu.cpp:39 ../src/cpu.c:225
 msgid "Background colour"
 msgstr "Farba pozadia"
 
-#: ../src/cpu.cpp:42
+#: ../src/cpu.cpp:43
 #, fuzzy
 msgid "CPU"
 msgstr "TCP"
+
+#: ../src/cpu.c:221
+#, fuzzy
+msgid "CPU Usage"
+msgstr "Použitie:"
+
+#: ../src/cpu.c:233
+#, fuzzy
+msgid "CPU Usage Monitor"
+msgstr "Sledovanie teploty CPU"
+
+#: ../src/cpu.c:235
+#, fuzzy
+msgid "Display CPU usage"
+msgstr "Zobraziť teplotu CPU"
+
+#, c-format
