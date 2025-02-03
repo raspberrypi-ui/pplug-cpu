@@ -136,11 +136,6 @@ void cpu_init (CPUPlugin *c)
 
     cpu_update_display (c);
 
-#ifndef LXPLUG
-    /* Set up long press */
-    c->gesture = add_long_press (c->plugin, NULL, NULL);
-#endif
-
     /* Connect a timer to refresh the statistics. */
     c->timer = g_timeout_add (1500, (GSourceFunc) cpu_update, (gpointer) c);
 
@@ -154,9 +149,6 @@ void cpu_destructor (gpointer user_data)
     graph_free (&(c->graph));
     if (c->timer) g_source_remove (c->timer);
 
-#ifndef LXPLUG
-    if (c->gesture) g_object_unref (c->gesture);
-#endif
     g_free (c);
 }
 
