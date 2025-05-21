@@ -1,5 +1,5 @@
 /*============================================================================
-Copyright (c) 2018-2025 Raspberry Pi Holdings Ltd.
+Copyright (c) 2018-2025 Raspberry Pi
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
@@ -29,6 +29,8 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 /* Typedefs and macros                                                        */
 /*----------------------------------------------------------------------------*/
 
+#define PLUGIN_TITLE "CPU"
+
 typedef unsigned long long CPUTick;         /* Value from /proc/stat */
 
 typedef struct
@@ -45,7 +47,6 @@ typedef struct
     config_setting_t *settings;             /* Plugin settings */
 #else
     int icon_size;                          /* Variables used under wf-panel */
-    gboolean bottom;
 #endif
 
     PluginGraph graph;
@@ -55,6 +56,8 @@ typedef struct
     guint timer;                            /* Timer for periodic update */
     cpu_stat previous_cpu_stat;             /* Previous value of cpu_stat */
 } CPUPlugin;
+
+extern conf_table_t conf_table[4];
 
 /*----------------------------------------------------------------------------*/
 /* Prototypes                                                                 */

@@ -1,5 +1,5 @@
 /*============================================================================
-Copyright (c) 2024 Raspberry Pi Holdings Ltd.
+Copyright (c) 2024 Raspberry Pi
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
@@ -33,21 +33,9 @@ extern "C" {
     WayfireWidget *create () { return new WayfireCPU; }
     void destroy (WayfireWidget *w) { delete w; }
 
-    static constexpr conf_table_t conf_table[4] = {
-        {CONF_BOOL,     "show_percentage",  N_("Show usage as percentage")},
-        {CONF_COLOUR,   "foreground",       N_("Foreground colour")},
-        {CONF_COLOUR,   "background",       N_("Background colour")},
-        {CONF_NONE,     NULL,               NULL}
-    };
     const conf_table_t *config_params (void) { return conf_table; };
-    const char *display_name (void) { return N_("CPU"); };
+    const char *display_name (void) { return N_(PLUGIN_TITLE); };
     const char *package_name (void) { return GETTEXT_PACKAGE; };
-}
-
-void WayfireCPU::bar_pos_changed_cb (void)
-{
-    if ((std::string) bar_pos == "bottom") cpu->bottom = TRUE;
-    else cpu->bottom = FALSE;
 }
 
 void WayfireCPU::icon_size_changed_cb (void)
@@ -84,7 +72,6 @@ void WayfireCPU::init (Gtk::HBox *container)
     cpu->plugin = (GtkWidget *)((*plugin).gobj());
     cpu->icon_size = icon_size;
     icon_timer = Glib::signal_idle().connect (sigc::mem_fun (*this, &WayfireCPU::set_icon));
-    bar_pos_changed_cb ();
 
     /* Add long press for right click */
     gesture = add_longpress_default (*plugin);
@@ -94,7 +81,6 @@ void WayfireCPU::init (Gtk::HBox *container)
 
     /* Setup callbacks */
     icon_size.set_callback (sigc::mem_fun (*this, &WayfireCPU::icon_size_changed_cb));
-    bar_pos.set_callback (sigc::mem_fun (*this, &WayfireCPU::bar_pos_changed_cb));
     show_percentage.set_callback (sigc::mem_fun (*this, &WayfireCPU::settings_changed_cb));
     foreground_colour.set_callback (sigc::mem_fun (*this, &WayfireCPU::settings_changed_cb));
     background_colour.set_callback (sigc::mem_fun (*this, &WayfireCPU::settings_changed_cb));

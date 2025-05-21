@@ -1,5 +1,5 @@
 /*============================================================================
-Copyright (c) 2018-2025 Raspberry Pi Holdings Ltd.
+Copyright (c) 2018-2025 Raspberry Pi
 All rights reserved.
 
 Some code taken from the lxpanel project
@@ -58,6 +58,13 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 /*----------------------------------------------------------------------------*/
 /* Global data                                                                */
 /*----------------------------------------------------------------------------*/
+
+conf_table_t conf_table[4] = {
+    {CONF_TYPE_BOOL,     "show_percentage",  N_("Show usage as percentage"),    NULL},
+    {CONF_TYPE_COLOUR,   "foreground",       N_("Foreground colour"),           NULL},
+    {CONF_TYPE_COLOUR,   "background",       N_("Background colour"),           NULL},
+    {CONF_TYPE_NONE,     NULL,               NULL,                              NULL}
+};
 
 /*----------------------------------------------------------------------------*/
 /* Prototypes                                                                 */
@@ -148,7 +155,6 @@ void cpu_destructor (gpointer user_data)
     CPUPlugin *c = (CPUPlugin *) user_data;
     graph_free (&(c->graph));
     if (c->timer) g_source_remove (c->timer);
-
     g_free (c);
 }
 
@@ -160,8 +166,6 @@ void cpu_destructor (gpointer user_data)
 /* Constructor */
 static GtkWidget *cpu_constructor (LXPanel *panel, config_setting_t *settings)
 {
-    const char *str;
-
     /* Allocate and initialize plugin context */
     CPUPlugin *c = g_new0 (CPUPlugin, 1);
 
@@ -171,19 +175,16 @@ static GtkWidget *cpu_constructor (LXPanel *panel, config_setting_t *settings)
     c->plugin = gtk_event_box_new ();
     lxpanel_plugin_set_data (c->plugin, c, cpu_destructor);
 
-    /* Read config */
-    if (!config_setting_lookup_int (c->settings, "ShowPercent", &c->show_percentage)) c->show_percentage = 0;
-    if (config_setting_lookup_string (c->settings, "Foreground", &str))
-    {
-        if (!gdk_rgba_parse (&c->foreground_colour, str))
-            gdk_rgba_parse (&c->foreground_colour, "dark gray");
-    } else gdk_rgba_parse (&c->foreground_colour, "dark gray");
+    /* Set config defaults */
+    gdk_rgba_parse (&c->foreground_colour, "dark gray");
+    gdk_rgba_parse (&c->background_colour, "light gray");
+    c->show_percentage = TRUE;
 
-    if (config_setting_lookup_string (c->settings, "Background", &str))
-    {
-        if (!gdk_rgba_parse (&c->background_colour, str))
-            gdk_rgba_parse (&c->background_colour, "light gray");
-    } else gdk_rgba_parse (&c->background_colour, "light gray");
+    /* Read config */
+    conf_table[0].value = (void *) &c->show_percentage;
+    conf_table[1].value = (void *) &c->foreground_colour;
+    conf_table[2].value = (void *) &c->background_colour;
+    lxplug_read_settings (c->settings, conf_table);
 
     cpu_init (c);
 
@@ -201,13 +202,8 @@ static void cpu_configuration_changed (LXPanel *, GtkWidget *plugin)
 static gboolean cpu_apply_configuration (gpointer user_data)
 {
     CPUPlugin *c = lxpanel_plugin_get_data (GTK_WIDGET (user_data));
-    char colbuf[32];
 
-    config_group_set_int (c->settings, "ShowPercent", c->show_percentage);
-    sprintf (colbuf, "%s", gdk_rgba_to_string (&c->foreground_colour));
-    config_group_set_string (c->settings, "Foreground", colbuf);
-    sprintf (colbuf, "%s", gdk_rgba_to_string (&c->background_colour));
-    config_group_set_string (c->settings, "Background", colbuf);
+    lxplug_write_settings (c->settings, conf_table);
 
     cpu_update_display (c);
     return FALSE;
@@ -216,21 +212,16 @@ static gboolean cpu_apply_configuration (gpointer user_data)
 /* Display configuration dialog */
 static GtkWidget *cpu_configure (LXPanel *panel, GtkWidget *plugin)
 {
-    CPUPlugin *c = lxpanel_plugin_get_data (plugin);
-
-    return lxpanel_generic_config_dlg(_("CPU Usage"), panel,
+    return lxpanel_generic_config_dlg_new(_(PLUGIN_TITLE), panel,
         cpu_apply_configuration, plugin,
-        _("Show usage as percentage"), &c->show_percentage, CONF_TYPE_BOOL,
-        _("Foreground colour"), &c->foreground_colour, CONF_TYPE_COLOR,
-        _("Background colour"), &c->background_colour, CONF_TYPE_COLOR,
-        NULL);
+        conf_table);
 }
 
 FM_DEFINE_MODULE (lxpanel_gtk, cpu)
 
 /* Plugin descriptor */
 LXPanelPluginInit fm_module_init_lxpanel_gtk = {
-    .name = N_("CPU Usage Monitor"),
+    .name = N_(PLUGIN_TITLE),
     .config = cpu_configure,
     .description = N_("Display CPU usage"),
     .new_instance = cpu_constructor,
