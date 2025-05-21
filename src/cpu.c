@@ -212,7 +212,7 @@ static gboolean cpu_apply_configuration (gpointer user_data)
 /* Display configuration dialog */
 static GtkWidget *cpu_configure (LXPanel *panel, GtkWidget *plugin)
 {
-    return lxpanel_generic_config_dlg_new(_(PLUGIN_TITLE), panel,
+    return lxpanel_generic_config_dlg_new (_(PLUGIN_TITLE), panel,
         cpu_apply_configuration, plugin,
         conf_table);
 }
