@@ -42,7 +42,6 @@ class WayfireCPU : public WayfireWidget
     std::unique_ptr <Gtk::Button> plugin;
     Glib::RefPtr<Gtk::GestureLongPress> gesture;
 
-    WfOption <int> icon_size {"panel/icon_size"};
     sigc::connection icon_timer;
 
     WfOption <bool> show_percentage {"panel/cpu_show_percentage"};
@@ -56,8 +55,8 @@ class WayfireCPU : public WayfireWidget
 
     void init (Gtk::HBox *container) override;
     virtual ~WayfireCPU ();
-    void icon_size_changed_cb (void);
     bool set_icon (void);
+    void read_settings (void);
     void settings_changed_cb (void);
 };
 

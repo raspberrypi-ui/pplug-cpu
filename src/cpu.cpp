@@ -38,25 +38,24 @@ extern "C" {
     const char *package_name (void) { return GETTEXT_PACKAGE; };
 }
 
-void WayfireCPU::icon_size_changed_cb (void)
-{
-    cpu->icon_size = icon_size;
-    cpu_update_display (cpu);
-}
-
 bool WayfireCPU::set_icon (void)
 {
     cpu_update_display (cpu);
     return false;
 }
 
-void WayfireCPU::settings_changed_cb (void)
+void WayfireCPU::read_settings (void)
 {
     cpu->show_percentage = show_percentage;
     if (!gdk_rgba_parse (&cpu->foreground_colour, ((std::string) foreground_colour).c_str()))
         gdk_rgba_parse (&cpu->foreground_colour, "dark gray");
     if (!gdk_rgba_parse (&cpu->background_colour, ((std::string) background_colour).c_str()))
         gdk_rgba_parse (&cpu->background_colour, "light gray");
+}
+
+void WayfireCPU::settings_changed_cb (void)
+{
+    read_settings ();
     cpu_update_display (cpu);
 }
 
@@ -70,22 +69,19 @@ void WayfireCPU::init (Gtk::HBox *container)
     /* Setup structure */
     cpu = g_new0 (CPUPlugin, 1);
     cpu->plugin = (GtkWidget *)((*plugin).gobj());
-    cpu->icon_size = icon_size;
     icon_timer = Glib::signal_idle().connect (sigc::mem_fun (*this, &WayfireCPU::set_icon));
 
     /* Add long press for right click */
     gesture = add_longpress_default (*plugin);
 
     /* Initialise the plugin */
+    read_settings ();
     cpu_init (cpu);
 
     /* Setup callbacks */
-    icon_size.set_callback (sigc::mem_fun (*this, &WayfireCPU::icon_size_changed_cb));
     show_percentage.set_callback (sigc::mem_fun (*this, &WayfireCPU::settings_changed_cb));
     foreground_colour.set_callback (sigc::mem_fun (*this, &WayfireCPU::settings_changed_cb));
     background_colour.set_callback (sigc::mem_fun (*this, &WayfireCPU::settings_changed_cb));
-
-    settings_changed_cb ();
 }
 
 WayfireCPU::~WayfireCPU()
