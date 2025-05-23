@@ -29,7 +29,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 /* Typedefs and macros                                                        */
 /*----------------------------------------------------------------------------*/
 
-#define PLUGIN_TITLE "CPU"
+#define PLUGIN_TITLE N_("CPU")
 
 typedef unsigned long long CPUTick;         /* Value from /proc/stat */
 

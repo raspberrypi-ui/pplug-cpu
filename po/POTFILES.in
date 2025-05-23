@@ -1,2 +1,5 @@
-src/cpu.cpp
+[encoding: UTF-8]
 src/cpu.c
+src/cpu.cpp
+src/cpu.h
+src/cpu.hpp

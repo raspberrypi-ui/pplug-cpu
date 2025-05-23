@@ -1,15 +1,15 @@
-# English translations for wf-panel-pi package.
-# Copyright (C) 2024 Raspberry Pi Ltd
+# English translations for plugin package.
+# Copyright (C) 2025 Raspberry Pi
 # This file is distributed under the same license as the wf-panel-pi package.
-# Simon Long <simon@raspberrypi.org>, 2024.
+# Simon Long <simon@raspberrypi.com>, 2025.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-01-23 11:06+0000\n"
-"PO-Revision-Date: 2017-03-06 14:18+0000\n"
-"Last-Translator:  <simon@raspberrypi.org>\n"
+"POT-Creation-Date: 2025-05-23 10:36+0100\n"
+"PO-Revision-Date: 2025-05-23 10:36+0100\n"
+"Last-Translator: Simon Long <simon@raspberrypi.com>\n"
 "Language-Team: English (British)\n"
 "Language: en_GB\n"
 "MIME-Version: 1.0\n"
@@ -17,18 +17,22 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ../src/cpu.cpp:36
+#: ../src/cpu.c:63
 msgid "Show usage as percentage"
-msgstr "Show usage as percentage"
+msgstr "Show Usage as Percentage"
 
-#: ../src/cpu.cpp:37
+#: ../src/cpu.c:64
 msgid "Foreground colour"
-msgstr "Foreground colour"
+msgstr "Foreground Colour"
 
-#: ../src/cpu.cpp:38
+#: ../src/cpu.c:65
 msgid "Background colour"
-msgstr "Background colour"
+msgstr "Background Colour"
 
-#: ../src/cpu.cpp:42
+#: ../src/cpu.c:227
+msgid "Display CPU usage"
+msgstr ""
+
+#: ../src/cpu.h:32
 msgid "CPU"
 msgstr "CPU"
