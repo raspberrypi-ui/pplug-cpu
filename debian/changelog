@@ -1,4 +1,4 @@
-pplug-cpu (0.2) trixie; urgency=medium
+pplug-cpu (1.0) trixie; urgency=medium
 
   * Modify for lxpanel-pi
 
