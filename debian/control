@@ -10,12 +10,12 @@ Build-Depends:
 Standards-Version: 4.5.1
 Homepage: http://raspberrypi.com/
 
-Package: lxplug-cpu
+Package: lpplug-cpu
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends},
  lxpanel-pi
-Description: CPU plugin for lxpanel
- Plugin for lxpanel to display CPU load.
+Description: CPU plugin for lxpanel-pi
+ Plugin for lxpanel-pi to display CPU load.
 
 Package: wfplug-cpu
 Architecture: any
