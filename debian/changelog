@@ -1,3 +1,9 @@
+pplug-cpu (1.1) trixie; urgency=medium
+
+  * Add Chinese translation
+
+ -- Simon Long <simon@raspberrypi.com>  Tue, 02 Sep 2025 09:01:06 +0100
+
 pplug-cpu (1.0) trixie; urgency=medium
 
   * Modify for lxpanel-pi
