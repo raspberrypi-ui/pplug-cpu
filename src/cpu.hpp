@@ -44,9 +44,9 @@ class WayfireCPU : public WayfireWidget
 
     sigc::connection icon_timer;
 
-    WfOption <bool> show_percentage {"panel/cpu_show_percentage"};
-    WfOption <std::string> foreground_colour {"panel/cpu_foreground"};
-    WfOption <std::string> background_colour {"panel/cpu_background"};
+    WfOption <bool> show_percentage {"cpu/show_percentage"};
+    WfOption <std::string> foreground_colour {"cpu/foreground"};
+    WfOption <std::string> background_colour {"cpu/background"};
 
     /* plugin */
     CPUPlugin *cpu;
