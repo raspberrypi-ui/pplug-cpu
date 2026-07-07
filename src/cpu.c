@@ -126,6 +126,11 @@ void cpu_init (CPUPlugin *c)
     graph_init (&(c->graph));
     gtk_container_add (GTK_CONTAINER (c->plugin), c->graph.da);
 
+    /* Set up button */
+#ifndef LXPLUG
+    add_long_press (c->plugin, NULL, NULL);
+#endif
+
     cpu_update_display (c);
 
     /* Connect a timer to refresh the statistics. */

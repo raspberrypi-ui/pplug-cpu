@@ -26,7 +26,6 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ============================================================================*/
 
 #include <glibmm.h>
-#include "gtk-utils.hpp"
 #include "cpu.hpp"
 
 extern "C" {
@@ -70,9 +69,6 @@ void WayfireCPU::init (Gtk::HBox *container)
     cpu = g_new0 (CPUPlugin, 1);
     cpu->plugin = (GtkWidget *)((*plugin).gobj());
     icon_timer = Glib::signal_idle().connect (sigc::mem_fun (*this, &WayfireCPU::set_icon));
-
-    /* Add long press for right click */
-    gesture = add_longpress_default (*plugin);
 
     /* Initialise the plugin */
     read_settings ();
