@@ -128,7 +128,7 @@ void cpu_init (CPUPlugin *c)
 
     /* Set up button */
 #ifndef LXPLUG
-    add_long_press (c->plugin, NULL, NULL);
+    c->gesture = add_long_press (c->plugin, NULL, NULL);
 #endif
 
     cpu_update_display (c);
@@ -143,6 +143,11 @@ void cpu_init (CPUPlugin *c)
 void cpu_destructor (gpointer user_data)
 {
     CPUPlugin *c = (CPUPlugin *) user_data;
+
+#ifndef LXPLUG
+    if (c->gesture) g_object_unref (c->gesture);
+#endif
+
     graph_free (&(c->graph));
     if (c->timer) g_source_remove (c->timer);
     g_free (c);
