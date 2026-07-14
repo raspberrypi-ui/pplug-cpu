@@ -36,7 +36,7 @@ extern "C" {
 #include "cpu.h"
 }
 
-class WayfireCPU : public WayfireWidget
+class WidgetCPU : public PanelWidget
 {
     std::unique_ptr <Gtk::Button> plugin;
 
@@ -52,7 +52,7 @@ class WayfireCPU : public WayfireWidget
   public:
 
     void init (Gtk::HBox *container) override;
-    virtual ~WayfireCPU ();
+    virtual ~WidgetCPU ();
     bool set_icon (void);
     void read_settings (void);
     void settings_changed_cb (void);

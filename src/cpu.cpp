@@ -29,21 +29,21 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "cpu.hpp"
 
 extern "C" {
-    WayfireWidget *create () { return new WayfireCPU; }
-    void destroy (WayfireWidget *w) { delete w; }
+    PanelWidget *create () { return new WidgetCPU; }
+    void destroy (PanelWidget *w) { delete w; }
 
     const conf_table_t *config_params (void) { return conf_table; };
     const char *display_name (void) { return PLUGIN_TITLE; };
     const char *package_name (void) { return GETTEXT_PACKAGE; };
 }
 
-bool WayfireCPU::set_icon (void)
+bool WidgetCPU::set_icon (void)
 {
     cpu_update_display (cpu);
     return false;
 }
 
-void WayfireCPU::read_settings (void)
+void WidgetCPU::read_settings (void)
 {
     cpu->show_percentage = show_percentage;
     if (!gdk_rgba_parse (&cpu->foreground_colour, ((std::string) foreground_colour).c_str()))
@@ -52,13 +52,13 @@ void WayfireCPU::read_settings (void)
         gdk_rgba_parse (&cpu->background_colour, "light gray");
 }
 
-void WayfireCPU::settings_changed_cb (void)
+void WidgetCPU::settings_changed_cb (void)
 {
     read_settings ();
     cpu_update_display (cpu);
 }
 
-void WayfireCPU::init (Gtk::HBox *container)
+void WidgetCPU::init (Gtk::HBox *container)
 {
     /* Create the button */
     plugin = std::make_unique <Gtk::Button> ();
@@ -68,19 +68,19 @@ void WayfireCPU::init (Gtk::HBox *container)
     /* Setup structure */
     cpu = g_new0 (CPUPlugin, 1);
     cpu->plugin = (GtkWidget *)((*plugin).gobj());
-    icon_timer = Glib::signal_idle().connect (sigc::mem_fun (*this, &WayfireCPU::set_icon));
+    icon_timer = Glib::signal_idle().connect (sigc::mem_fun (*this, &WidgetCPU::set_icon));
 
     /* Initialise the plugin */
     read_settings ();
     cpu_init (cpu);
 
     /* Setup callbacks */
-    show_percentage.set_callback (sigc::mem_fun (*this, &WayfireCPU::settings_changed_cb));
-    foreground_colour.set_callback (sigc::mem_fun (*this, &WayfireCPU::settings_changed_cb));
-    background_colour.set_callback (sigc::mem_fun (*this, &WayfireCPU::settings_changed_cb));
+    show_percentage.set_callback (sigc::mem_fun (*this, &WidgetCPU::settings_changed_cb));
+    foreground_colour.set_callback (sigc::mem_fun (*this, &WidgetCPU::settings_changed_cb));
+    background_colour.set_callback (sigc::mem_fun (*this, &WidgetCPU::settings_changed_cb));
 }
 
-WayfireCPU::~WayfireCPU()
+WidgetCPU::~WidgetCPU()
 {
     icon_timer.disconnect ();
     cpu_destructor (cpu);
