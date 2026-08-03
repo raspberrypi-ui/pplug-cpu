@@ -45,10 +45,10 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 /*----------------------------------------------------------------------------*/
 
 conf_table_t conf_table[4] = {
-    {CONF_TYPE_BOOL,     "show_percentage",  N_("Show usage as percentage"),    NULL},
-    {CONF_TYPE_COLOUR,   "foreground",       N_("Foreground colour"),           NULL},
-    {CONF_TYPE_COLOUR,   "background",       N_("Background colour"),           NULL},
-    {CONF_TYPE_NONE,     NULL,               NULL,                              NULL}
+    {CONF_TYPE_BOOL,     "show_percentage",  N_("Show usage as percentage"),    NULL,   "true"      },
+    {CONF_TYPE_COLOUR,   "foreground",       N_("Foreground colour"),           NULL,   "dark gray" },
+    {CONF_TYPE_COLOUR,   "background",       N_("Background colour"),           NULL,   "light gray"},
+    {CONF_TYPE_NONE,     NULL,               NULL,                              NULL,   NULL        }
 };
 
 /*----------------------------------------------------------------------------*/

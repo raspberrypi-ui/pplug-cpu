@@ -45,16 +45,17 @@ bool WidgetCPU::set_icon (void)
 
 void WidgetCPU::read_settings (void)
 {
-    cpu->show_percentage = show_percentage;
-    if (!gdk_rgba_parse (&cpu->foreground_colour, ((std::string) foreground_colour).c_str()))
-        gdk_rgba_parse (&cpu->foreground_colour, "dark gray");
-    if (!gdk_rgba_parse (&cpu->background_colour, ((std::string) background_colour).c_str()))
-        gdk_rgba_parse (&cpu->background_colour, "light gray");
+    conf_table[0].value = (void *) &cpu->show_percentage;
+    conf_table[1].value = (void *) &cpu->foreground_colour;
+    conf_table[2].value = (void *) &cpu->background_colour;
+
+    load_configuration_data (PLUGIN_NAME, conf_table);
 }
 
-void WidgetCPU::settings_changed_cb (void)
+void WidgetCPU::handle_config_reload (void)
 {
-    read_settings ();
+    load_configuration_data (PLUGIN_NAME, conf_table);
+
     cpu_update_display (cpu);
 }
 
@@ -73,11 +74,6 @@ void WidgetCPU::init (Gtk::HBox *container)
     /* Initialise the plugin */
     read_settings ();
     cpu_init (cpu);
-
-    /* Setup callbacks */
-    show_percentage.set_callback (sigc::mem_fun (*this, &WidgetCPU::settings_changed_cb));
-    foreground_colour.set_callback (sigc::mem_fun (*this, &WidgetCPU::settings_changed_cb));
-    background_colour.set_callback (sigc::mem_fun (*this, &WidgetCPU::settings_changed_cb));
 }
 
 WidgetCPU::~WidgetCPU()

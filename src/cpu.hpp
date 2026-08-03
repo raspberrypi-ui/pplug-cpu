@@ -42,10 +42,6 @@ class WidgetCPU : public PanelWidget
 
     sigc::connection icon_timer;
 
-    WfOption <bool> show_percentage {"cpu/show_percentage"};
-    WfOption <std::string> foreground_colour {"cpu/foreground"};
-    WfOption <std::string> background_colour {"cpu/background"};
-
     /* plugin */
     CPUPlugin *cpu;
 
@@ -55,7 +51,7 @@ class WidgetCPU : public PanelWidget
     virtual ~WidgetCPU ();
     bool set_icon (void);
     void read_settings (void);
-    void settings_changed_cb (void);
+    void handle_config_reload (void);
 };
 
 #endif /* end of include guard: WIDGETS_CPU_HPP */
