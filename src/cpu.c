@@ -116,6 +116,13 @@ void cpu_update_display (CPUPlugin *c)
     graph_reload (&(c->graph), wrap_icon_size (c), c->background_colour, c->foreground_colour, none, none);
 }
 
+void cpu_set_values (CPUPlugin *c)
+{
+    conf_table[0].value = (void *) &c->show_percentage;
+    conf_table[1].value = (void *) &c->foreground_colour;
+    conf_table[2].value = (void *) &c->background_colour;
+}
+
 void cpu_init (CPUPlugin *c)
 {
     setlocale (LC_ALL, "");
@@ -170,15 +177,8 @@ static GtkWidget *cpu_constructor (LXPanel *panel, config_setting_t *settings)
     c->plugin = gtk_event_box_new ();
     lxpanel_plugin_set_data (c->plugin, c, cpu_destructor);
 
-    /* Set config defaults */
-    gdk_rgba_parse (&c->foreground_colour, "dark gray");
-    gdk_rgba_parse (&c->background_colour, "light gray");
-    c->show_percentage = TRUE;
-
     /* Read config */
-    conf_table[0].value = (void *) &c->show_percentage;
-    conf_table[1].value = (void *) &c->foreground_colour;
-    conf_table[2].value = (void *) &c->background_colour;
+    cpu_set_values (c);
     lxplug_read_settings (c->settings, conf_table);
 
     cpu_init (c);

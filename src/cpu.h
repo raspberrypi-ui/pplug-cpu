@@ -64,6 +64,7 @@ extern conf_table_t conf_table[4];
 /*----------------------------------------------------------------------------*/
 
 extern void cpu_init (CPUPlugin *up);
+extern void cpu_set_values (CPUPlugin *up);
 extern void cpu_update_display (CPUPlugin *up);
 extern void cpu_destructor (gpointer user_data);
 

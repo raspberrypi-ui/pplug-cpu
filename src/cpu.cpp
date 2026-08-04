@@ -43,20 +43,9 @@ bool WidgetCPU::set_icon (void)
     return false;
 }
 
-void WidgetCPU::read_settings (void)
-{
-    conf_table[0].value = (void *) &cpu->show_percentage;
-    conf_table[1].value = (void *) &cpu->foreground_colour;
-    conf_table[2].value = (void *) &cpu->background_colour;
-
-    load_configuration_data (PLUGIN_NAME, conf_table);
-}
-
 void WidgetCPU::handle_config_reload (void)
 {
-    load_configuration_data (PLUGIN_NAME, conf_table);
-
-    cpu_update_display (cpu);
+    if (load_configuration_data (PLUGIN_NAME, conf_table)) cpu_update_display (cpu);
 }
 
 void WidgetCPU::init (Gtk::HBox *container)
@@ -72,7 +61,8 @@ void WidgetCPU::init (Gtk::HBox *container)
     icon_timer = Glib::signal_idle().connect (sigc::mem_fun (*this, &WidgetCPU::set_icon));
 
     /* Initialise the plugin */
-    read_settings ();
+    cpu_set_values (cpu);
+    load_configuration_data (PLUGIN_NAME, conf_table);
     cpu_init (cpu);
 }
 
