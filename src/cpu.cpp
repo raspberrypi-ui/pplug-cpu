@@ -37,18 +37,17 @@ extern "C" {
     const char *package_name (void) { return GETTEXT_PACKAGE; };
 }
 
-bool WidgetCPU::set_icon (void)
+void WidgetCPU::widget_set_icon (void)
 {
     cpu_update_display (cpu);
-    return false;
 }
 
-void WidgetCPU::handle_config_reload (void)
+void WidgetCPU::widget_config_reload (void)
 {
     if (load_configuration_data (PLUGIN_NAME, conf_table)) cpu_update_display (cpu);
 }
 
-void WidgetCPU::init (Gtk::HBox *container)
+void WidgetCPU::widget_init (Gtk::HBox *container)
 {
     /* Create the button */
     plugin = std::make_unique <Gtk::Button> ();
@@ -58,7 +57,6 @@ void WidgetCPU::init (Gtk::HBox *container)
     /* Setup structure */
     cpu = g_new0 (CPUPlugin, 1);
     cpu->plugin = (GtkWidget *)((*plugin).gobj());
-    icon_timer = Glib::signal_idle().connect (sigc::mem_fun (*this, &WidgetCPU::set_icon));
 
     /* Initialise the plugin */
     cpu_set_values (cpu);
@@ -68,7 +66,6 @@ void WidgetCPU::init (Gtk::HBox *container)
 
 WidgetCPU::~WidgetCPU()
 {
-    icon_timer.disconnect ();
     cpu_destructor (cpu);
 }
 
