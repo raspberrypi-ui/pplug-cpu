@@ -68,9 +68,7 @@ static void cpu_configuration_changed (LXPanel *, GtkWidget *plugin)
 static gboolean cpu_apply_configuration (gpointer user_data)
 {
     CPUPlugin *c = lxpanel_plugin_get_data (GTK_WIDGET (user_data));
-
     lxplug_write_settings (c->settings, conf_table);
-
     cpu_update_display (c);
     return FALSE;
 }
@@ -89,11 +87,11 @@ char module_name[] = PLUGIN_NAME;
 /* Plugin descriptor */
 LXPanelPluginInit fm_module_init_lxpanel_gtk = {
     .name = PLUGIN_TITLE,
-    .config = cpu_configure,
+    .gettext_package = GETTEXT_PACKAGE,
     .description = N_("Display CPU usage"),
     .new_instance = cpu_constructor,
     .reconfigure = cpu_configuration_changed,
-    .gettext_package = GETTEXT_PACKAGE
+    .config = cpu_configure
 };
 
 /* End of file */
