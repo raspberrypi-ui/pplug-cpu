@@ -41,20 +41,14 @@ typedef struct
 typedef struct
 {
     GtkWidget *plugin;
-
-#ifdef LXPLUG
-    LXPanel *panel;                         /* Back pointer to panel */
-    config_setting_t *settings;             /* Plugin settings */
-#else
     GtkGesture *gesture;
-#endif
-
     PluginGraph graph;
     GdkRGBA foreground_colour;              /* Foreground colour for drawing area */
     GdkRGBA background_colour;              /* Background colour for drawing area */
     gboolean show_percentage;               /* Display usage as a percentage */
     guint timer;                            /* Timer for periodic update */
     cpu_stat previous_cpu_stat;             /* Previous value of cpu_stat */
+    LXPLUG_VARS
 } CPUPlugin;
 
 extern conf_table_t conf_table[4];
