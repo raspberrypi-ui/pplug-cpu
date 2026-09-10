@@ -29,7 +29,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define WIDGETS_CPU_HPP
 
 #include <widget.hpp>
-#include <gtkmm/eventbox.h>
+#include <gtkmm/button.h>
 
 extern "C" {
 #include "plugin.h"
@@ -40,7 +40,7 @@ class WidgetCPU : public PanelWidget
 {
     CPUPlugin *cpu;
 
-    std::unique_ptr <Gtk::EventBox> plugin;
+    std::unique_ptr <Gtk::Button> plugin;
 
   public:
 
