@@ -30,6 +30,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 /*----------------------------------------------------------------------------*/
 
 #define PLUGIN_TITLE N_("CPU")
+#define PLUGIN_DESC N_("Display CPU usage")
 
 typedef unsigned long long CPUTick;         /* Value from /proc/stat */
 

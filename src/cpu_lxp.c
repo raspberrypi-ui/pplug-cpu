@@ -87,8 +87,8 @@ char module_name[] = PLUGIN_NAME;
 /* Plugin descriptor */
 LXPanelPluginInit fm_module_init_lxpanel_gtk = {
     .name = PLUGIN_TITLE,
+    .description = PLUGIN_DESC,
     .gettext_package = GETTEXT_PACKAGE,
-    .description = N_("Display CPU usage"),
     .new_instance = cpu_constructor,
     .reconfigure = cpu_configuration_changed,
     .config = cpu_configure
